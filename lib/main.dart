@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time/home/homeScreen.dart';
 import 'package:time/permission/permission.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const PermissionPage()
+      home: const HomeScreen()
     );
   }
 }

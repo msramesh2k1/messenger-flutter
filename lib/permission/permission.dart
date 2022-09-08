@@ -86,7 +86,7 @@ class _PermissionPageState extends State<PermissionPage> {
                                       fontWeight: FontWeight.w300,
                                     ),
                                   ),
-                                  SizedBox(height: 17),
+                                  SizedBox(height: 15),
                                  
                       Row(
                                     children: [
@@ -114,19 +114,21 @@ class _PermissionPageState extends State<PermissionPage> {
                                                   height: 40,
                                                   width: 120,
                                                   decoration: BoxDecoration(
-                                                      color: Colors.green,
+                                                      color: Colors.blue[100]!
+                                                .withOpacity(0.3),
+                                            
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              15)),
+                                                              10)),
                                                   child: Center(
                                                     child: Text(
-                                                      'Accept',
+                                                      'Allow Access',
                                                       style: GoogleFonts
                                                           .nunitoSans(
-                                                        fontSize: 20,
-                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                        color: Colors.black,
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w600,
                                                       ),
                                                     ),
                                                   ),
@@ -135,27 +137,27 @@ class _PermissionPageState extends State<PermissionPage> {
                                               SizedBox(
                                                 width: 10,
                                               ),
-                                              Container(
-                                                height: 40,
-                                                width: 120,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.red,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                child: Center(
-                                                  child: Text(
-                                                    'Decline',
-                                                    style:
-                                                        GoogleFonts.nunitoSans(
-                                                      fontSize: 20,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
+                                              // Container(
+                                              //   height: 40,
+                                              //   width: 120,
+                                              //   decoration: BoxDecoration(
+                                              //       color: Colors.red,
+                                              //       borderRadius:
+                                              //           BorderRadius.circular(
+                                              //               15)),
+                                              //   child: Center(
+                                              //     child: Text(
+                                              //       'Decline',
+                                              //       style:
+                                              //           GoogleFonts.nunitoSans(
+                                              //         fontSize: 20,
+                                              //         color: Colors.white,
+                                              //         fontWeight:
+                                              //             FontWeight.w700,
+                                              //       ),
+                                              //     ),
+                                              //   ),
+                                              // )
                                             ],
                                           ),
                                         ),
@@ -183,7 +185,18 @@ class _PermissionPageState extends State<PermissionPage> {
     final PermissionStatus permission = await Permission.contacts.status;
     if (permission.isDenied) {
       final Map<Permission, PermissionStatus> permissionStatus =
-          await [Permission.contacts].request();
+          await [Permission.contacts].request().then((value) {
+            print(value);
+            print(value.values);
+            print(value['Permission.contacts']);
+            return value;
+
+          });
+    }
+    if (permission.isGranted) {
+      print("HEL");
+      // final Map<Permission, PermissionStatus> permissionStatus =
+      //     await [Permission.contacts].request();
     }
     print(permission);
     // if (permission != PermissionStatus.granted &&
